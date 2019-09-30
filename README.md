@@ -1,15 +1,3 @@
-# Mesopotamian Knowledge Graph 
+# mesopotamian-knowledge-graph
 
-## About the project
-
-This project is a place to use different NLP tools and LinkedData techniques to explore the way ancient Mesopotamians organized information. 
-
-## List of Blog Posts 
-
-<ul>
-    {% for post in site.posts %}
-    <li>
-    <a href="{{ post.url }}">{{post.date | date: "%A, %b %-d, %Y" }}: {{ post.title }} </a> 
-    </li>
-    {% endfor %}
-</ul>
+Exploring the way knowledge was organized in the ancient Near East
