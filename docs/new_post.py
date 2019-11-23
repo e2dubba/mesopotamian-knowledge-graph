@@ -6,6 +6,7 @@ import datetime
 from collections import namedtuple
 import subprocess
 import os
+import re
 
 
 HEADER = namedtuple("Header", "layout title author category tags")
@@ -29,6 +30,7 @@ category: {}
         ", ".join(header.tags),
         header.category,
     )
+    print(string)
     return string
 
 
@@ -41,11 +43,11 @@ def main():
         action="store_true",
     )
     aparser.add_argument(
-        "-i", "--ipynb", help="Convert a Jupyter notebook to markdown"
+        "-i",
+        "--ipynb",
+        help="Convert a Jupyter notebook to markdown, notebooks should be camel cased",
     )
-    aparser.add_argument(
-        "-c", "--category", help="Specify the category of the post"
-    )
+    aparser.add_argument("-c", "--category", help="Specify the category of the post")
     aparser.add_argument(
         "-t",
         "--tags",
@@ -58,19 +60,14 @@ def main():
     args = aparser.parse_args()
     if args.ipynb:
         file_name = args.ipynb
-        title = args.ipynb
-    else:
-        title = args.title
+        # title = re.sub(r"([A-Z][a-z]+)", r" \1", args.ipynb).strip()
+    title = args.title
     if args.tags:
         tags = [tag for tag in args.tags.split(",")]
     else:
         tags = []
     header = HEADER(
-        title=title,
-        layout="post",
-        author="",
-        tags=tags,
-        category=args.category,
+        title=title, layout="post", author="", tags=tags, category=args.category
     )
 
     if not args.update:
@@ -80,8 +77,10 @@ def main():
 
     title = title.replace(" ", "_")
     if args.ipynb:
-        out_file = "_posts/{}.md".format(os.path.basename(title))
-        print(out_file)
+        # title = os.path.basename(title)
+        # title, _ = os.path.splitext(title)
+        # out_file = "_posts/{}.md".format(title)
+        out_file = "{}.md".format(title)
         subprocess.call(
             [
                 "jupyter",
@@ -90,12 +89,13 @@ def main():
                 "markdown",
                 "--output",
                 out_file,
+                "--output-dir=./_posts/",
                 file_name,
             ]
         )
-        with open(out_file, "w+") as f:
+        with open("./_posts/{}.md".format(title), "r") as f:
             content = f.read()
-            f.seek(0, 0)
+        with open("./_posts/{}.md".format(title), "w") as f:
             heading_string = write_header(header)
             f.write(heading_string + content)
     else:
