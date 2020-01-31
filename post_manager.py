@@ -125,14 +125,14 @@ def main():
     draft_parser = subparsers.add_parser("draft", help="Create a draft file")
     draft_parser.set_defaults(func=draft_writer)
     update_parser = subparsers.add_parser(
-        "update", help="Update a draft and move it to _docs"
+        "update", help="Update a draft and move it to _posts"
     )
     update_parser.set_defaults(func=updater)
     # update_parser.add_argument("file", help="File that needs to be updated")
     ipynb_parser = subparsers.add_parser(
         "ipynb",
         # add_help=False,
-        help="Update iPython Notebook to a post",
+        help="Update iPython Notebook to a markdown file in _posts",
     )
     # ipynb_parser.add_argument("ipynb_file", help="Notebook to update")
     ipynb_parser.set_defaults(func=ipynb)
