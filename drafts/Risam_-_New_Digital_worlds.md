@@ -1,5 +1,5 @@
 --
-title: Risam - New Digital worlds
+title: Risam - New Digital Worlds
 layout: post
 author: e2dubba
 tags: digitalhumanities, criticaltheory
