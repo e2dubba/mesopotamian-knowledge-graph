@@ -77,7 +77,7 @@ def updater(header, title, file_name):
     date = datetime.datetime.now()
     date = date.strftime("%Y-%m-%d-")
     dest_name = date + os.path.basename(file_name)
-    shutil.move(file_name, os.path.join("_posts", dest_name))
+    shutil.move(file_name, os.path.join("docs/_posts", dest_name))
 
 
 def ipynb(header, title, file_name):
@@ -85,6 +85,7 @@ def ipynb(header, title, file_name):
     Convert a jupyter notebook into a markdown file, prefixed with the date of
     the script is run
     """
+    print("made it here")
     date = datetime.datetime.now()
     date = date.strftime("%Y-%m-%d-")
     out_file = os.path.splitext(os.path.basename(file_name))[0]
@@ -144,13 +145,17 @@ def main():
         aparser.add_argument(
             "-t",
             "--tags",
-            help="Specify tags for the post, make them comma seperated.\
-                    Like: `python,machinelearning`",
+            help=(
+                "Specify tags for the post, make them comma seperated.                 "
+                "   Like: `python,machinelearning`"
+            ),
         )
         aparser.add_argument(
             "-a",
             "--author",
-            help="Specify the name of the post, otherwise, git username will be assumed",
+            help=(
+                "Specify the name of the post, otherwise, git username will be assumed"
+            ),
         )
         aparser.add_argument("-b", "--blogtitle", help="Title for the Blog post")
         aparser.add_argument("-f", "--filename", help="filename")
@@ -159,7 +164,7 @@ def main():
 
     file_name = args.filename
     if args.tags:
-        tags = [tag for tag in args.tags.split(",")]
+        tags = args.tags.split(",")
     else:
         tags = []
     if args.author:

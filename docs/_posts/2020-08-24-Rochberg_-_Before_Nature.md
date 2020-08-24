@@ -26,7 +26,6 @@ it is analogous to contemporary practices of science (see especially p. 276).
 Rochberg points out that analogy is at the heart of Mesopotamian reasoning (p.
 158).
 
-
 One of the key insights I wanted to glean from this book is to help answer the
 question: What subjects are worthy of scholarship in the cuneiform world? What
 did the ancient scholars see as a worthy object of study? Rochberg shows how
